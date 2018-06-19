@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/lib/jquery-2.1.1.min.js"></script>
+    <script src="js/index/index.js"></script>
+    <script src="js/lib/flexible.js"></script>
+
+
+
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="head">
+            <h1>
+                <img src="img/1.png" alt="">
+            </h1>
+        </div>
+        <section>
+            <div class="content">
+                <ul class="ul"></ul>
+                <!-- <ul>
+                    <li>
+                        <p><img src="img/img1.png" alt=""></p>
+                        <h2>满三十减70</h2>
+                    </li>
+                    <li>
+                        <p><img src="img/img1.png" alt=""></p>
+                        <h2>满三十减70</h2>
+                    </li>
+                    <li>
+                        <p><img src="img/img1.png" alt=""></p>
+                        <h2>满三十减70</h2>
+                    </li>
+                    <li>
+                        <p><img src="img/img1.png" alt=""></p>
+                        <h2>满三十减70</h2>
+                    </li>
+                </ul> -->
+            </div>
+        </section>
+        <footer></footer>
+    </div>
+</body>
+<script src="js/lib/handlebars-v4.0.11.js"></script>
+<script type="text/x-handlebars-template" class="text">
+
+    {{#each data}}
+    <li>
+        <p><img src="{{img}}" alt=""></p>
+        <h2>{{title}}</h2>
+    </li>
+    {{/each}}
+
+</script>
+<script>
+    $.ajax({
+        url: '/api/data',
+        dataType: 'json',
+        success: function(data) {
+            //获取模板内容
+
+            var html = $('.text').html();
+
+            var com = Handlebars.compile(html);
+
+            $('.ul').html(com(data))
+                //console.log(data)
+        }
+    })
+</script>
+
+
+
+</html>
